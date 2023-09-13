@@ -1,6 +1,5 @@
 import cartModel from "../../models/cart.js"
 import productModel from "../../models/product.js"
-import ticketsModel from "../../models/ticket.js"
 
 export default class CartsManager {
 
@@ -63,7 +62,7 @@ export default class CartsManager {
         return cartModel.findByIdAndUpdate(id, { products: [] })
     }
 
-    purchase = async (id, user) => {
+    purchase = async (id, logger) => {
         try {
             
             const cart = await cartModel.findById(id).populate("products.product", "_id title description price stock")
@@ -71,7 +70,7 @@ export default class CartsManager {
             const unstockProducts = []
             for (const item of cart.products) {
                 if (item.product.stock < item.quantity) {
-                    console.log(`Insufficient quantity for product: ${item.product.title}`)
+                    logger.info(`Insufficient quantity for product: ${item.product.title}`)
                     unstockProducts.push(item)
                 } else {
                     const newStock = item.product.stock - item.quantity

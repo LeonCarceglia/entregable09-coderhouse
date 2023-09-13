@@ -84,9 +84,9 @@ class CartsRepository {
         }
     }
 
-    async purchase(id){
+    async purchase(id, logger){
         try {
-            return await this.dao.purchase(id)
+            return await this.dao.purchase(id, logger)
         }
         catch(error){
             throw(error)

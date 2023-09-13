@@ -1,12 +1,10 @@
 import dotenv from "dotenv"
 
-const environment = "DEVELOPMENT"
-
 dotenv.config({
-  path: environment === "PRODUCTION" ? "./.env.production" : "./.env.development" 
+  path: process.env.ENVIROMENT === "PRODUCTION" ? "./.env.production" : "./.env.development"
 })
 
-console.log("Environment: ", environment)
+console.log("Environment: ", process.env.ENVIROMENT)
 console.log("MongoDB URL: ", process.env.MONGO_URL)
 console.log("Port: ", process.env.PORT)
 
@@ -15,5 +13,5 @@ export default {
   MONGODB_URL: process.env.MONGO_URL,
   ADMIN_USER: process.env.ADMIN_EMAIL,
   ADMIN_PASS: process.env.ADMIN_PASSWORD,
-  ENVIROMENT: environment
+  ENVIRONMENT: process.env.ENVIROMENT
 }

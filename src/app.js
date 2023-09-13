@@ -13,9 +13,9 @@ import ProductsRouter from "./routes/products.router.js"
 import CartsRouter from "./routes/carts.router.js"
 import SessionsRouter from "./routes/session.router.js"
 
-import { __dirname } from "./utils/utils.js"
-import { initializeSocket } from "./utils/utils.js"
-import { addLoger } from "./utils/logger.js"
+import { __dirname } from "./utils.js"
+import { initializeSocket } from "./utils.js"
+import { addLoger } from "./config/logger.js"
 import config from "./config/config.js"
 import ErrorHandler from "./config/error.config.js"
 
@@ -39,8 +39,8 @@ app.use(
     saveUninitialized: false,
   })
 )
-app.use(ErrorHandler)
 app.use(addLoger)
+app.use(ErrorHandler)
 
 app.engine("handlebars", handlebars.engine())
 app.set("views", __dirname + "/views")

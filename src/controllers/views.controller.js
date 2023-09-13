@@ -1,6 +1,6 @@
-import {cartService} from "../services/index.js"
-import {productService} from "../services/index.js"
-import {userService} from "../services/index.js"
+import { cartService } from "../services/index.js"
+import { productService } from "../services/index.js"
+import { userService } from "../services/index.js"
 
 
 const getProductsRender = async (req, res) => {
@@ -24,7 +24,7 @@ const getProductsRender = async (req, res) => {
         hasNextPage: products.hasNextPage,
         nextPage: page < products.totalPages ? page + 1 : null,
         prevPage: page > 1 ? page - 1 : null
-      }
+    }
     res.render("products", { products: productsRender, paginationInfo, user })
 }
 
@@ -50,7 +50,7 @@ const login = (req, res) => {
 
 const current = (req, res) => {
     const user = userService.getCurrentUser(req.session.user)
-    res.render('current', {user})
+    res.render('current', { user })
 }
 
 const logout = (req, res) => {
@@ -59,8 +59,20 @@ const logout = (req, res) => {
     })
 }
 
-const chat = (req, res) =>{
+const chat = (req, res) => {
     res.render("chat", {})
+}
+
+const loggerTest = (req, res) => {
+    if (req.logger.level === "debug") {
+        req.logger.debug("Test debug")
+        req.logger.http("Test http")
+    }
+    req.logger.info("Test info")
+    req.logger.warning("Test warning")
+    req.logger.error("Test error")
+    req.logger.fatal("Test fatal")
+    res.send({ message: "Logger test" })
 }
 
 export default {
@@ -70,5 +82,6 @@ export default {
     login,
     logout,
     current,
-    chat
+    chat,
+    loggerTest
 }

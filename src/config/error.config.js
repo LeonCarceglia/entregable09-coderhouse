@@ -1,7 +1,7 @@
 import EnumErrors from "../services/errors/Enum.errors.js"
 
 export default (error, req, res, next) => {
-  console.log(error.cause)
+  req.logger.info(error.cause)
   switch (error.code) {
     case EnumErrors.INVALID_TYPES_ERROR:
       res.json({ status: "error", error: error.name })

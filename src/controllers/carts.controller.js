@@ -54,7 +54,7 @@ const deleteProducts = async (req,res) =>{
 const purchase = async (req,res) =>{
     const {cid} = req.params
     const user = req.session.user
-    const amount = await cartService.purchase(cid)
+    const amount = await cartService.purchase(cid, req.logger)
     const ticket = await ticketService.createTicket(amount, user.email)
     res.json({status: "ok", data: ticket})
 }

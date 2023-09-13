@@ -3,7 +3,7 @@ import local from "passport-local"
 import { userService } from "../services/index.js"
 import { cartService } from "../services/index.js"
 import GitHubStrategy from "passport-github2"
-import { createHash, isValidPassword } from "../utils/utils.js"
+import { createHash, isValidPassword } from "../utils.js"
 import config from "./config.js"
 
 const localStrategy = local.Strategy
