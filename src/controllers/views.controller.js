@@ -64,10 +64,9 @@ const chat = (req, res) => {
 }
 
 const loggerTest = (req, res) => {
-    if (req.logger.level === "debug") {
-        req.logger.debug("Test debug")
-        req.logger.http("Test http")
-    }
+
+    req.logger.debug("Test debug")
+    req.logger.http("Test http")
     req.logger.info("Test info")
     req.logger.warning("Test warning")
     req.logger.error("Test error")

@@ -26,7 +26,8 @@ const devLogger = winston.createLogger({
             level: "debug",
             format: winston.format.combine(
                 winston.format.colorize({ colors: customLevelOptions.colors }),
-                winston.format.simple())
+                winston.format.simple()
+            )
         })
     ]
 })
@@ -49,8 +50,9 @@ const prodLogger = winston.createLogger({
     ]
 })
 
-export const  addLoger = (req, res, next) => {
+export const addLoger = (req, res, next) => {
     req.logger = (config.ENVIRONMENT === 'DEVELOPMENT') ? devLogger : prodLogger
+    console.log(req.logger.transports[0].level)
     req.logger.http(`${req.method} in ${req.url} -- ${new Date().toLocaleTimeString()}`)
     next()
 }
