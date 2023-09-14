@@ -12,7 +12,7 @@ const customLevelOptions = {
     },
     colors: {
         fatal: "red",
-        error: "orange",
+        error: "magenta",
         warning: "yellow",
         info: "blue",
         debug: "white"
@@ -52,7 +52,6 @@ const prodLogger = winston.createLogger({
 
 export const addLoger = (req, res, next) => {
     req.logger = (config.ENVIRONMENT === 'DEVELOPMENT') ? devLogger : prodLogger
-    console.log(req.logger.transports[0].level)
     req.logger.http(`${req.method} in ${req.url} -- ${new Date().toLocaleTimeString()}`)
     next()
 }
